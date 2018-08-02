@@ -1,0 +1,35 @@
+services:
+  alphapose:
+    build: ./for-alphapose
+    command: jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token=
+      --notebook-dir='/'
+    devices:
+    - /dev/nvidia0
+    - /dev/nvidiactl
+    - /dev/nvidia-uvm
+    ports:
+    - 8883:8888
+    - 6003:6006
+    - 5003:5000
+    volumes:
+    - nvidia_driver_384.130:/usr/local/nvidia:ro
+  big-track-jupyter2:
+    build: ./big-track2
+    command: jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token=
+      --notebook-dir='/repository'
+    devices:
+    - /dev/nvidia0
+    - /dev/nvidiactl
+    - /dev/nvidia-uvm
+    ports:
+    - 8882:8888
+    - 6002:6006
+    - 5002:5000
+    volumes:
+    - ./data:/data
+    - ./config:/config
+    - nvidia_driver_384.130:/usr/local/nvidia:ro
+version: '2'
+volumes:
+  nvidia_driver_384.130:
+    external: true

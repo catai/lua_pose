@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  # big-track-jupyter:
+  #   build: ./big-track
+  #   ports:
+  #     - 8883:8888
+  #     - 6003:6006
+  #     - 5003:5000
+  #   volumes:
+  #     - ./data:/data
+  #     - ./config:/config
+  #
+  #   command: jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/data'
+
+  big-track-jupyter2:
+    build: ./big-track2
+    ports:
+      - 8882:8888
+      - 6002:6006
+      - 5002:5000
+    volumes:
+      - ./data:/data
+      - ./config:/config
+
+    command: jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/repository'
+
+  alphapose:
+    build: ./for-alphapose
+    ports:
+      - 8883:8888
+      - 6003:6006
+      - 5003:5000
+    command: jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/'
